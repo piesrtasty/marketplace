@@ -25,13 +25,13 @@ gulp.task('styles',function() {
   // move over fonts
 
   gulp.src('css/fonts/**.*')
-    .pipe(gulp.dest('mybuld/css/fonts'))
+    .pipe(gulp.dest('build/css/fonts'))
 
   // Compiles CSS
   gulp.src('css/style.styl')
     .pipe(stylus())
     .pipe(autoprefixer())
-    .pipe(gulp.dest('./mybuld/css/'))
+    .pipe(gulp.dest('./build/css/'))
     .pipe(reload({stream:true}))
 });
 
@@ -40,7 +40,7 @@ gulp.task('styles',function() {
 */
 gulp.task('images',function(){
   gulp.src('css/images/**')
-    .pipe(gulp.dest('./mybuld/css/images'))
+    .pipe(gulp.dest('./build/css/images'))
 });
 
 /*
@@ -64,7 +64,7 @@ function handleErrors() {
   this.emit('end'); // Keep gulp from hanging on this task
 }
 
-function mybuldScript(file, watch) {
+function buildScript(file, watch) {
   var props = {
     entries: ['./scripts/' + file],
     debug : true,
@@ -79,12 +79,12 @@ function mybuldScript(file, watch) {
     return stream
       .on('error', handleErrors)
       .pipe(source(file))
-      .pipe(gulp.dest('./mybuld/'))
+      .pipe(gulp.dest('./build/'))
       // If you also want to uglify it
       // .pipe(buffer())
       // .pipe(uglify())
       // .pipe(rename('app.min.js'))
-      // .pipe(gulp.dest('./mybuld'))
+      // .pipe(gulp.dest('./build'))
       .pipe(reload({stream:true}))
   }
 
@@ -94,16 +94,16 @@ function mybuldScript(file, watch) {
     gutil.log('Rebundle...');
   });
 
-  // run it once the first time mybuldScript is called
+  // run it once the first time buildScript is called
   return rebundle();
 }
 
 gulp.task('scripts', function() {
-  return mybuldScript('main.js', false); // this will run once because we set watch to false
+  return buildScript('main.js', false); // this will run once because we set watch to false
 });
 
 // run 'scripts' task first, then watch for future changes
 gulp.task('default', ['images','styles','scripts','browser-sync'], function() {
   gulp.watch('css/**/*', ['styles']); // gulp watch for stylus changes
-  return mybuldScript('main.js', true); // browserify watch for JS changes
+  return buildScript('main.js', true); // browserify watch for JS changes
 });
