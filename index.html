@@ -14,25 +14,28 @@ mixpanel.init("b6505af482222f070e4451eb3335f0c6");</script><!-- end Mixpanel -->
 
 <body>
 
-  Hello World
+  <input type="checkbox" id="fold">
+  <label for="fold">Fold</label>
 
-  <a class="product-link" href="http://www.amazon.com/gp/product/B017Y6FEM6?ref_=gbph_img_m-3_8982_810b9eb8&smid=ATVPDKIKX0DER">Amazon TV</a>
+  <div id="main">
+    <!-- This is where our React app will go -->
+  </div>
 
-  <script type="text/javascript">
+  <script src="/build/main.js"></script>
 
+  <!-- Hello World -->
+  <!-- <a class="product-link" href="http://www.amazon.com/gp/product/B017Y6FEM6?ref_=gbph_img_m-3_8982_810b9eb8&smid=ATVPDKIKX0DER">Amazon TV</a> -->
+
+  <!-- <script type="text/javascript">
     var userEmail = "lukehamiltonmail@gmail.com";
-
     mixpanel.track_links("a.product-link", "click product link", {
       "userEmail": userEmail,
       "referrer": document.referrer
     });
+  </script> -->
 
-  </script>
-
-  <div class="container">
-
+  <!-- <div class="container">
     <div class="row">
-
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="http://placehold.it/320x150" alt="">
@@ -54,10 +57,8 @@ mixpanel.init("b6505af482222f070e4451eb3335f0c6");</script><!-- end Mixpanel -->
                 </div>
             </div>
         </div>
-
     </div>
-
-  </div>
+  </div> -->
 
 </body>
 
