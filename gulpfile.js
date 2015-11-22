@@ -25,13 +25,13 @@ gulp.task('styles',function() {
   // move over fonts
 
   gulp.src('css/fonts/**.*')
-    .pipe(gulp.dest('build/css/fonts'))
+    .pipe(gulp.dest('dist/css/fonts'))
 
   // Compiles CSS
   gulp.src('css/style.styl')
     .pipe(stylus())
     .pipe(autoprefixer())
-    .pipe(gulp.dest('./build/css/'))
+    .pipe(gulp.dest('./dist/css/'))
     .pipe(reload({stream:true}))
 });
 
@@ -40,7 +40,7 @@ gulp.task('styles',function() {
 */
 gulp.task('images',function(){
   gulp.src('css/images/**')
-    .pipe(gulp.dest('./build/css/images'))
+    .pipe(gulp.dest('./dist/css/images'))
 });
 
 /*
@@ -64,7 +64,7 @@ function handleErrors() {
   this.emit('end'); // Keep gulp from hanging on this task
 }
 
-function buildScript(file, watch) {
+function distScript(file, watch) {
   var props = {
     entries: ['./scripts/' + file],
     debug : true,
@@ -79,12 +79,12 @@ function buildScript(file, watch) {
     return stream
       .on('error', handleErrors)
       .pipe(source(file))
-      .pipe(gulp.dest('./build/'))
+      .pipe(gulp.dest('./dist/'))
       // If you also want to uglify it
       // .pipe(buffer())
       // .pipe(uglify())
       // .pipe(rename('app.min.js'))
-      // .pipe(gulp.dest('./build'))
+      // .pipe(gulp.dest('./dist'))
       .pipe(reload({stream:true}))
   }
 
@@ -94,16 +94,16 @@ function buildScript(file, watch) {
     gutil.log('Rebundle...');
   });
 
-  // run it once the first time buildScript is called
+  // run it once the first time distScript is called
   return rebundle();
 }
 
 gulp.task('scripts', function() {
-  return buildScript('main.js', false); // this will run once because we set watch to false
+  return distScript('main.js', false); // this will run once because we set watch to false
 });
 
 // run 'scripts' task first, then watch for future changes
 gulp.task('default', ['images','styles','scripts','browser-sync'], function() {
   gulp.watch('css/**/*', ['styles']); // gulp watch for stylus changes
-  return buildScript('main.js', true); // browserify watch for JS changes
+  return distScript('main.js', true); // browserify watch for JS changes
 });
