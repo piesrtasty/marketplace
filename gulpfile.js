@@ -79,7 +79,7 @@ function distScript(file, watch) {
     return stream
       .on('error', handleErrors)
       .pipe(source(file))
-      .pipe(gulp.dest('./dist/'))
+      .pipe(gulp.dest('./'))
       // If you also want to uglify it
       // .pipe(buffer())
       // .pipe(uglify())
